@@ -14,9 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+// Using more reliable Fisher-Yates Shuffle
 function generateRandomNumbers(size) {
     const numbers = Array.from({ length: size }, (_, i) => i + 1);
-    numbers.sort(() => Math.random() - 0.5);
+    // Fisher-Yates shuffle
+    for (let i = numbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    }
     return numbers;
 }
 var numbers=generateRandomNumbers(25);
